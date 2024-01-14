@@ -8,10 +8,9 @@ import (
 	"os"
 )
 
-func findKeyWord(word string, doc []string) (wordCound int){
+func findKeyWord(word string, doc []string) (wordCound float32){
     for _, v := range doc { 
         if v == word {
-            fmt.Println(v)
             wordCound += 1
         }
     } 
@@ -45,13 +44,13 @@ func main() {
     parsedResume := parsString(resume)
     parsedJobDes := parsString(jobDescription)
 
-    var wordCount int
+    var wordCount float32
 
     for _, v := range parsedJobDes {
         wordCount += findKeyWord(v, parsedResume) 
     }
+  
+    mached := fmt.Sprintf("%g",wordCount/float32(len(parsedJobDes))*100)
 
-    mached := fmt.Sprintf("%d",(wordCount/len(parsedJobDes))*100)
-
-    fmt.Println(mached+"%")
+    fmt.Println(mached+"% Match")
 }
